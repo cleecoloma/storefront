@@ -2,9 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveCategory } from '../../store/categories/index.js';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 function Categories() {
   const categories = useSelector((state) => state.categories.categories);
@@ -13,23 +12,26 @@ function Categories() {
   );
   const dispatch = useDispatch();
 
-  const handleCategoryClick = (categoryName) => {
-    dispatch(setActiveCategory(categoryName));
+  const handleCategoryChange = (event, newValue) => {
+    dispatch(setActiveCategory(newValue));
   };
 
   return (
-    <List component='nav'>
+    <Tabs
+      value={activeCategory}
+      onChange={handleCategoryChange}
+      centered
+      indicatorColor='primary'
+      textColor='primary'
+    >
       {categories.map((category) => (
-        <ListItem
+        <Tab
           key={category.name}
-          button
-          selected={category.name === activeCategory}
-          onClick={() => handleCategoryClick(category.name)}
-        >
-          <ListItemText primary={category.displayName} />
-        </ListItem>
+          label={category.displayName}
+          value={category.name}
+        />
       ))}
-    </List>
+    </Tabs>
   );
 }
 
