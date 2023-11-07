@@ -1,0 +1,22 @@
+.categories-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 5px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.category-tab.active {
+  background-color: #3f51b5;
+  color: white;
+  border: 1px solid #3f51b5;
+}
