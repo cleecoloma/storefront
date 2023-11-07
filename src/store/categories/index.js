@@ -23,7 +23,7 @@ const initialState = {
         'Health and wellness e-commerce caters to individuals looking to enhance their well-being, offering products like dietary supplements, fitness gear, skincare solutions, and holistic health aids, providing a convenient way to support a healthy and balanced lifestyle.',
     },
   ],
-  activeCategory: null,
+  activeCategory: 'electronics',
 };
 
 function reducer(state = initialState, action) {
