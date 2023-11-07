@@ -8,7 +8,7 @@ function Header() {
     <AppBar position='static'>
       <Toolbar>
         <Typography variant='h6' component='div'>
-          Koko Depot
+          KOKO DEPOT
         </Typography>
       </Toolbar>
     </AppBar>
