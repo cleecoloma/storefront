@@ -39,11 +39,12 @@ function reducer(state = initialState, action) {
   }
 }
 
-const setActiveCategory = (categoryName) => {
+export const setActiveCategory = (categoryName) => {
   return {
     type: SET_ACTIVE_CATEGORY,
     payload: categoryName,
   };
 };
 
-export { reducer, setActiveCategory };
+// export { reducer, setActiveCategory };
+export default reducer;

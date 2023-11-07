@@ -127,7 +127,7 @@ const initialProducts = [
   },
 ];
 
-function productsReducer(state = initialProducts, action) {
+function reducer(state = initialProducts, action) {
   switch (action.type) {
     case FILTER_PRODUCTS:
       return initialProducts.filter(product => product.category === action.payload);
@@ -136,11 +136,11 @@ function productsReducer(state = initialProducts, action) {
   }
 }
 
-const filterProducts = (categoryName) => {
+export const filterProducts = (categoryName) => {
   return {
     type: FILTER_PRODUCTS,
     payload: categoryName,
   };
 }
 
-export { productsReducer, filterProducts };
+export default reducer;
