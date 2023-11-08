@@ -6,20 +6,14 @@ import Typography from '@mui/material/Typography';
 import './Products.css';
 
 function Products() {
-  const activeCategory = useSelector(
-    (state) => state.categories.activeCategory
-  );
-  const products = useSelector((state) => state.products);
-  const categories = useSelector((state) => state.categories.categories);
-
-  // Filter products based on the active category
-  const filteredProducts = products.filter(
-    (product) => product.category === activeCategory
-  );
+  const productState = useSelector((state) => state.products);
+  const categoryState = useSelector((state) => state.categories);
+  // console.log("HERES THE CATEGORY STATE: ", categoryState);
+  console.log('HERES THE PRODUCT STATE: ', productState);
 
   // Find the active category in the categories array
-  const activeCategoryInfo = categories.find(
-    (category) => category.name === activeCategory
+  const activeCategoryInfo = categoryState.list.find(
+    (category) => category.name === categoryState.activeCategory
   );
 
   return (
@@ -32,7 +26,7 @@ function Products() {
           {activeCategoryInfo.description}
         </Typography>
       </div>
-      {filteredProducts.map((product) => (
+      {productState.displayList.map((product) => (
         <Card key={product.id} className='card' variant='outlined'>
           <CardContent className='card-content'>
             <Typography variant='h6' component='div'>

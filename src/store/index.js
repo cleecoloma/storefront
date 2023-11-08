@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux';
-import productsReducer from './products.js';
+import productsReducer from './products/index.js';
 import categoriesReducer from './categories';
 
 
