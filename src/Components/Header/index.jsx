@@ -21,18 +21,6 @@ function Header() {
     setIsModalOpen(false);
   };
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
   return (
     <AppBar position='static'>
       <Toolbar className='toolbar-container'>
@@ -45,9 +33,13 @@ function Header() {
         </a>
       </Toolbar>
       <Modal open={isModalOpen} onClose={handleModalClose}>
-        <Box className='box-style'>
+        {cartState.numOfUniqueItems > 0 ? <Box className='box-style'>
           <SimpleCart />
+        </Box> :
+        <Box className='box-style'>
+          No Items In Shopping Bag!
         </Box>
+        }
       </Modal>
     </AppBar>
   );

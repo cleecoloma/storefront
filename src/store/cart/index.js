@@ -33,15 +33,22 @@ const cartReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(removeFromCart, (state, action) => {
-      const { id, quantity } = action.payload;
-      const item = state.items[id];
-      // Check if the item exists in the cart and has enough quantity
-      if (item && item.quantity >= quantity) {
-        item.quantity -= quantity; // Decrement the quantity
-        if (item.quantity === 0) {
-          delete state.items[id]; // Remove the item if quantity reaches 0
+      const { name, quantity } = action.payload;
+      const item = state.items[name];
+
+      // Check if the item exists in the cart
+      if (item) {
+        if (item.quantity >= quantity) {
+          item.quantity -= quantity; // Decrement the quantity
+          if (item.quantity === 0) {
+            delete state.items[name]; // Remove the item if quantity reaches 0
+          }
+          state.numOfUniqueItems -= quantity; // Decrement unique item count
+        } else {
+          // If the item's quantity is less than the specified quantity, remove the entire item
+          delete state.items[name];
+          state.numOfUniqueItems -= item.quantity;
         }
-        state.numOfUniqueItems--; // Decrement unique item count
       }
     });
 });
