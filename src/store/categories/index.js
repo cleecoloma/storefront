@@ -7,7 +7,7 @@ const initialState = {
       name: 'all',
       displayName: 'ALL',
       description:
-        'Shop the latest in consumer electronics, stylish home furnishings, and essential health and wellness products. Discover innovation, convenience, and well-being all in one place.',
+        'Shop the latest in consumer electronics, stylish home furnishings, and essential health and wellness products. Discover innovation, convenience, and well-being all in one place, where cutting-edge technology meets the comfort of a beautifully designed home, making your life both exciting and relaxing.',
     },
     {
       name: 'electronics',

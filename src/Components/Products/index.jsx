@@ -17,7 +17,7 @@ function Products() {
   );
 
   return (
-    <div className='product-container'>
+    <div className='products'>
       <div className='category-info'>
         <Typography variant='h4' component='div'>
           {activeCategoryInfo.displayName}
@@ -26,18 +26,20 @@ function Products() {
           {activeCategoryInfo.description}
         </Typography>
       </div>
-      {productState.displayList.map((product) => (
-        <Card key={product.id} className='card' variant='outlined'>
-          <CardContent className='card-content'>
-            <Typography variant='h6' component='div'>
-              {product.name}
-            </Typography>
-            <Typography variant='body2' color='textSecondary'>
-              Price: ${product.price} | In Stock: {product.inventory}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+      <div className='product-container'>
+        {productState.displayList.map((product) => (
+          <Card key={product.id} className='card' variant='outlined'>
+            <CardContent className='card-content'>
+              <Typography variant='h6' component='div'>
+                {product.name}
+              </Typography>
+              <Typography variant='body2' color='textSecondary'>
+                Price: ${product.price} | In Stock: {product.inventory}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
