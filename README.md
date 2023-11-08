@@ -11,6 +11,12 @@ This application powers an online storefront that will allow our users to browse
 > 3. State managed in memory
 > 4. Material UI Components & Styling
 
+- Virtual Store Phase 1: Shopping Cart
+> 1. Add items to a shopping cart
+> 2. Update quantities
+> 3. Remove items from the cart
+> 4. Show the cart in real-time on the UI
+
 ## Table of Contents
 
 1. [Installation](#installation)
@@ -36,9 +42,11 @@ To get started with the application, follow these steps:
 
 ## UML Diagram
 ![UML Diagram Class 36 Store Front Redux](./public/images/storefront-redux.png)
+![UML Diagram Class 37 Store Front Combined Reducers](./public/images/storefront-combined-reducers.png)
 
 ## PR link
 [PR Link Class 36](https://github.com/cleecoloma/storefront/pull/1)
+[PR Link Class 37](https://github.com/cleecoloma/storefront/pull/2)
 
 ## Contributors
 * Chester Lee Coloma

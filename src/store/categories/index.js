@@ -1,9 +1,14 @@
 'use strict';
-
-const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  categories: [
+  list: [
+    {
+      name: 'all',
+      displayName: 'ALL',
+      description:
+        'Shop the latest in consumer electronics, stylish home furnishings, and essential health and wellness products. Discover innovation, convenience, and well-being all in one place, where cutting-edge technology meets the comfort of a beautifully designed home, making your life both exciting and relaxing.',
+    },
     {
       name: 'electronics',
       displayName: 'ELECTRONICS',
@@ -23,28 +28,19 @@ const initialState = {
         'Health and wellness e-commerce caters to individuals looking to enhance their well-being, offering products like dietary supplements, fitness gear, skincare solutions, and holistic health aids, providing a convenient way to support a healthy and balanced lifestyle.',
     },
   ],
-  activeCategory: 'electronics',
+  activeCategory: 'all',
 };
 
-function reducer(state = initialState, action) {
-  const { type, payload } = action;
-  switch (type) {
-    case SET_ACTIVE_CATEGORY:
-      return {
-        ...state,
-        activeCategory: payload,
-      };
-    default:
-      return state;
-  }
-}
+const categoriesSlice = createSlice({
+  name: 'categories',
+  initialState,
+  reducers: {
+    setActiveCategory: (state, action) => {
+      state.activeCategory = action.payload;
+    },
+  },
+});
 
-export const setActiveCategory = (categoryName) => {
-  return {
-    type: SET_ACTIVE_CATEGORY,
-    payload: categoryName,
-  };
-};
+export const { setActiveCategory } = categoriesSlice.actions;
 
-// export { reducer, setActiveCategory };
-export default reducer;
+export default categoriesSlice.reducer;
