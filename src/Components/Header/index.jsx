@@ -27,19 +27,23 @@ function Header() {
         <Typography variant='h6' component='div'>
           KOKO DEPOT
         </Typography>
-        <a onClick={handleBagClick} className='bag-button'>
+        <a
+          onClick={handleBagClick}
+          className='bag-button'
+          data-testid='bag-button'
+        >
           <ShoppingBagIcon fontSize='large' />
           <p className='bag-counter'>{cartState.numOfUniqueItems}</p>
         </a>
       </Toolbar>
       <Modal open={isModalOpen} onClose={handleModalClose}>
-        {cartState.numOfUniqueItems > 0 ? <Box className='box-style'>
-          <SimpleCart />
-        </Box> :
-        <Box className='box-style'>
-          No Items In Shopping Bag!
-        </Box>
-        }
+        {cartState.numOfUniqueItems > 0 ? (
+          <Box className='box-style'>
+            <SimpleCart />
+          </Box>
+        ) : (
+          <Box className='box-style'>No Items In Shopping Bag!</Box>
+        )}
       </Modal>
     </AppBar>
   );
