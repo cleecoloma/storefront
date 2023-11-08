@@ -1,20 +1,35 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { decrementInventory } from '../../store/products';
 import './Products.css';
 
 function Products() {
   const productState = useSelector((state) => state.products);
   const categoryState = useSelector((state) => state.categories);
+  const cartState = useSelector((state) => state.cart);
   // console.log("HERES THE CATEGORY STATE: ", categoryState);
-  console.log('HERES THE PRODUCT STATE: ', productState);
+  console.log('HERES THE CART STATE: ', cartState);
+  const dispatch = useDispatch();
 
   // Find the active category in the categories array
   const activeCategoryInfo = categoryState.list.find(
     (category) => category.name === categoryState.activeCategory
   );
+
+  const handleAddToCart = (product) => {
+    console.log('HERES THE PRODUCT OBJ ', product);
+    if (product.inventory > 0) {
+      dispatch({
+        type: 'cart/add',
+        payload: { item: product, quantity: 1 }, //
+      });
+      dispatch(decrementInventory(product));
+    }
+  };
 
   return (
     <div className='products'>
@@ -36,6 +51,12 @@ function Products() {
               <Typography variant='body2' color='textSecondary'>
                 Price: ${product.price} | In Stock: {product.inventory}
               </Typography>
+              <Button
+                variant='contained'
+                onClick={() => handleAddToCart(product)}
+              >
+                Add To Cart
+              </Button>
             </CardContent>
           </Card>
         ))}

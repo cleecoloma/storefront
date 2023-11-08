@@ -148,9 +148,18 @@ const productsSlice = createSlice({
         );
       }
     },
+    decrementInventory: (state, action) => {
+      console.log('HERES THE PRODUCT BEFORE: ', action.payload);
+      const { id } = action.payload;
+      console.log('HERES THE ID BEFORE: ', id);
+      const product = state.displayList.find((item) => item.id === id);
+      if (product && product.inventory > 0) {
+        product.inventory--;
+      }
+    },
   },
 });
 
-export const { filterProducts } = productsSlice.actions;
+export const { filterProducts, decrementInventory } = productsSlice.actions;
 
 export default productsSlice.reducer;
