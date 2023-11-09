@@ -7,7 +7,9 @@ import axios from 'axios';
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
-    const response = await axios.get('your_api_endpoint_here'); // Replace with your API endpoint
+    const response = await axios.get(
+      'https://api-js401.herokuapp.com/api/v1/products'
+    );
     return response.data;
   }
 );
@@ -22,19 +24,19 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     filterProducts: (state, action) => {
+      console.log('HERES THE PAYLOAD ', action.payload);
       const { category } = action.payload;
-      if (category === 'all') {
-        state.displayList = state.list;
-      } else {
-        state.displayList = state.list.filter(
-          (product) => product.category === category
-        );
-      }
+      // if (category === 'all') {
+      //   state.displayList = state.list;
+      // } else {
+      console.log('HERES THE STATE LIST ', state.list);
+      state.displayList.results = state.list.results.filter(
+        (product) => product.category === category
+      );
+      // }
     },
     decrementInventory: (state, action) => {
-      console.log('HERES THE PRODUCT BEFORE: ', action.payload);
       const { id } = action.payload;
-      console.log('HERES THE ID BEFORE: ', id);
       const product = state.displayList.find((item) => item.id === id);
       if (product && product.inventory > 0) {
         product.inventory--;
@@ -43,7 +45,6 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      // Assuming the response data has a structure similar to your initial state
       state.list = action.payload;
       state.displayList = action.payload;
     });
