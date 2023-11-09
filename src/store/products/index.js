@@ -37,7 +37,7 @@ const productsSlice = createSlice({
     },
     decrementInventory: (state, action) => {
       const { id } = action.payload;
-      const product = state.displayList.find((item) => item.id === id);
+      const product = state.displayList.results.find((item) => item.id === id);
       if (product && product.inventory > 0) {
         product.inventory--;
       }

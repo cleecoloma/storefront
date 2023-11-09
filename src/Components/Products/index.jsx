@@ -29,12 +29,12 @@ function Products() {
   }
 
   const handleAddToCart = (product) => {
-    if (product.inventory > 0) {
+    if (product.inStock > 0) {
       dispatch({
         type: 'cart/add',
         payload: { item: product, quantity: 1 },
       });
-      dispatch(decrementInventory({ id: product.id }));
+      dispatch(decrementInventory({ id: product._id }));
     }
   };
 
