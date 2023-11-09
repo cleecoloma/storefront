@@ -1,34 +1,20 @@
-'use strict';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const fetchCategories = createAsyncThunk(
+  'categories/fetchCategories',
+  async () => {
+    const response = await axios.get(
+      'https://api-js401.herokuapp.com/api/v1/categories'
+    );
+    console.log('HERES THE RESPONSE FROM API ', response);
+    return response.data;
+  }
+);
 
 const initialState = {
-  list: [
-    {
-      name: 'all',
-      displayName: 'ALL',
-      description:
-        'Shop the latest in consumer electronics, stylish home furnishings, and essential health and wellness products. Discover innovation, convenience, and well-being all in one place, where cutting-edge technology meets the comfort of a beautifully designed home, making your life both exciting and relaxing.',
-    },
-    {
-      name: 'electronics',
-      displayName: 'ELECTRONICS',
-      description:
-        'The electronics category encompasses a wide range of consumer and digital gadgets, including smartphones, laptops, cameras, and audio equipment, allowing customers to explore and purchase the latest technological innovations and devices.',
-    },
-    {
-      name: 'homeAndFurniture',
-      displayName: 'HOME AND FURNITURE',
-      description:
-        'Home and furniture e-commerce stores offer an extensive selection of items for interior design and home improvement, from sofas and tables to lighting fixtures and decorative accents, making it easy for shoppers to furnish and decorate their homes with style.',
-    },
-    {
-      name: 'healthAndWellness',
-      displayName: 'HEALTH AND WELLNESS',
-      description:
-        'Health and wellness e-commerce caters to individuals looking to enhance their well-being, offering products like dietary supplements, fitness gear, skincare solutions, and holistic health aids, providing a convenient way to support a healthy and balanced lifestyle.',
-    },
-  ],
-  activeCategory: 'all',
+  list: [],
+  activeCategory: 'electronics',
 };
 
 const categoriesSlice = createSlice({
@@ -38,6 +24,11 @@ const categoriesSlice = createSlice({
     setActiveCategory: (state, action) => {
       state.activeCategory = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      state.list = action.payload;
+    });
   },
 });
 

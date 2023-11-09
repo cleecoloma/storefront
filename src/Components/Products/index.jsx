@@ -11,8 +11,8 @@ function Products() {
   const productState = useSelector((state) => state.products);
   const categoryState = useSelector((state) => state.categories);
   const cartState = useSelector((state) => state.cart);
-  // console.log("HERES THE CATEGORY STATE: ", categoryState);
-  console.log('HERES THE CART STATE: ', cartState);
+  console.log("HERES THE CATEGORY STATE: ", categoryState);
+  // console.log('HERES THE CART STATE: ', cartState);
   const dispatch = useDispatch();
 
   // Find the active category in the categories array
@@ -30,15 +30,16 @@ function Products() {
       dispatch(decrementInventory(product));
     }
   };
+  console.log('HERES THE ACTIVE CATEGORY ', activeCategoryInfo);
 
   return (
     <div className='products'>
       <div className='category-info'>
         <Typography variant='h4' component='div'>
-          {activeCategoryInfo.displayName}
+          {/* {activeCategoryInfo.name} */}
         </Typography>
         <Typography variant='body2' color='textSecondary'>
-          {activeCategoryInfo.description}
+          {/* {activeCategoryInfo.description ? activeCategoryInfo.description : null} */}
         </Typography>
       </div>
       <div className='product-container'>

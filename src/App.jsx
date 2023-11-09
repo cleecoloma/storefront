@@ -13,7 +13,7 @@ function App() {
       <Provider store={store}>
         <Header />
         <Categories />
-        <Products />
+        {/* <Products /> */}
         <Footer />
       </Provider>
     </>

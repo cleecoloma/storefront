@@ -1,7 +1,8 @@
-import { createStore, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import productsReducer from './products';
 import categoriesReducer from './categories';
-import { cartReducer } from './cart';
+import { cartReducer } from './cart/index';
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -9,4 +10,8 @@ const reducer = combineReducers({
   cart: cartReducer,
 });
 
-export default createStore(reducer);
+const store = configureStore({
+  reducer,
+});
+
+export default store;

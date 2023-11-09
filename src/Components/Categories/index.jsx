@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveCategory } from '../../store/categories';
-import { filterProducts } from '../../store/products';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { fetchCategories } from '../../store/categories';
 
 function Categories() {
   const categoryState = useSelector((state) => state.categories);
@@ -11,12 +11,13 @@ function Categories() {
 
   const handleCategoryChange = (event, newValue) => {
     dispatch(setActiveCategory(newValue));
-    dispatch(filterProducts({ category: newValue }));
   };
 
   useEffect(() => {
-    dispatch(filterProducts({ category: 'all' }));
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  console.log("HERES THE CATEGORY STATE : ", categoryState);
 
   return (
     <Tabs
@@ -26,8 +27,8 @@ function Categories() {
       indicatorColor='primary'
       textColor='primary'
     >
-      {categoryState.list.map((item) => (
-        <Tab key={item.name} label={item.displayName} value={item.name} />
+      {categoryState.list.results.map((item) => (
+        <Tab key={item.name} label={item.name} value={item.name} />
       ))}
     </Tabs>
   );
