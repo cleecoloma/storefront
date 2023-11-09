@@ -12,19 +12,20 @@ const initialState = {
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addToCart, (state, action) => {
-      // console.log("HERES THE PRODUCT IN REDUCER ", action.payload)
-      const { id, category, name, description, price, inStock } =
+      console.log("HERES THE PRODUCT IN REDUCER ", action.payload)
+      const { _id, category, name, price, inStock } =
         action.payload.item;
       // Check if the item already exists in the cart
       if (inStock > 0) {
         if (state.items[name]) {
+          state.items[name].inStock -= 1;
           state.items[name].quantity += 1; // Increment the quantity
         } else {
           state.items[name] = {
-            id,
+            id: _id,
             category,
             name,
-            description,
+            inStock: inStock - 1,
             price,
             quantity: 1, // Initialize the quantity to 1 for a new item
           };

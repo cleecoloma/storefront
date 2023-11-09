@@ -17,10 +17,10 @@ export const fetchProducts = createAsyncThunk(
 export const updateProductInventory = createAsyncThunk(
   'products/updateProductInventory',
   async (payload) => {
-    const { id, inventory } = payload;
+    const { id, inventory, value } = payload;
     const response = await axios.put(
       `https://api-js401.herokuapp.com/api/v1/products/${id}`,
-      { inStock: inventory - 1 } // Assuming "inStock" is the field to update
+      { inStock: inventory + value } // Assuming "inStock" is the field to update
     );
     return response.data;
   }

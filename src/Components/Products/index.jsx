@@ -37,7 +37,7 @@ function Products() {
       });
       dispatch(decrementInventory({ id: product._id }));
       dispatch(
-        updateProductInventory({ id: product._id, inventory: product.inStock })
+        updateProductInventory({ id: product._id, inventory: product.inStock, value: -1 })
       );
     }
   };
