@@ -14,6 +14,18 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const updateProductInventory = createAsyncThunk(
+  'products/updateProductInventory',
+  async (payload) => {
+    const { id, inventory } = payload;
+    const response = await axios.put(
+      `https://api-js401.herokuapp.com/api/v1/products/${id}`,
+      { inStock: inventory - 1 } // Assuming "inStock" is the field to update
+    );
+    return response.data;
+  }
+);
+
 const initialState = {
   displayList: [],
   list: [],
@@ -24,22 +36,29 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     filterProducts: (state, action) => {
-      console.log('HERES THE PAYLOAD ', action.payload);
       const { category } = action.payload;
-      // if (category === 'all') {
-      //   state.displayList = state.list;
-      // } else {
-      console.log('HERES THE STATE LIST ', state.list);
       state.displayList.results = state.list.results.filter(
         (product) => product.category === category
       );
       // }
     },
     decrementInventory: (state, action) => {
+      console.log('HERES THE PAYLOAD WITH ID IN IT ', action.payload);
       const { id } = action.payload;
-      const product = state.displayList.results.find((item) => item.id === id);
-      if (product && product.inventory > 0) {
-        product.inventory--;
+      const product = state.displayList.results.find((item) => item._id === id);
+      if (product && product.inStock > 0) {
+        // Dispatch the async action to update the inStock on the server
+        state.displayList.results.map((item) => {
+          if (item._id === id) {
+            item.inStock--;
+            // Assuming you have an "inStock" field in your data
+            // Update the server data asynchronously
+            // dispatch(
+            //   updateProductInventory({ id: item.id, inventory: item.inventory })
+            // );
+          }
+          return item;
+        });
       }
     },
   },

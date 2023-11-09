@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import {
   filterProducts,
   decrementInventory,
+  updateProductInventory,
   fetchProducts,
 } from '../../store/products';
 import './Products.css';
@@ -35,6 +36,9 @@ function Products() {
         payload: { item: product, quantity: 1 },
       });
       dispatch(decrementInventory({ id: product._id }));
+      dispatch(
+        updateProductInventory({ id: product._id, inventory: product.inStock })
+      );
     }
   };
 
